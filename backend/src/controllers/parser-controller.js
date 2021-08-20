@@ -1,4 +1,4 @@
-const logger = require('../config/logger-config').logger;
+const logger = require('../../config/logger-config').logger;
 const { default: SlippiGame } = require('@slippi/slippi-js');
 const fs = require('fs');
 const rimraf = require("rimraf");
@@ -14,7 +14,7 @@ const parserController = (db) => {
         try {
             // Reload config on each request in case it has changed
             delete require.cache[require.resolve('../config/maintenance-config.js')];
-            const config = require('../config/maintenance-config');
+            const config = require('../../config/maintenance-config');
             if (config.disableUpload) {
                 return res.status(500).send({ message: 'Upload currently disabled.' });
             }

@@ -1,4 +1,4 @@
-const logger = require('../config/logger-config').logger;
+const logger = require('../../config/logger-config').logger;
 
 const maintenanceController = () => {
 
@@ -6,7 +6,7 @@ const maintenanceController = () => {
         try {
             // Reload config on each request in case it has changed
             delete require.cache[require.resolve('../config/maintenance-config.js')];
-            const config = require('../config/maintenance-config');  
+            const config = require('../../config/maintenance-config');
             res.send({ display: config.display, message: config.message });
         }
         catch (e) {

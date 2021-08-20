@@ -1,6 +1,6 @@
-const logger = require('../config/logger-config').logger;
+const logger = require('../../config/logger-config').logger;
 const mongoose = require('mongoose');
-const mongoConfig = require('../config/mongo-config');
+const mongoConfig = require('../../config/mongo-config');
 const config = mongoConfig.config;
 const models = mongoConfig.models;
 

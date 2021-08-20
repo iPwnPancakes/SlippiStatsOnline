@@ -16,15 +16,15 @@ const routes = (db) => {
         res.send({ status: 'UP' });
     });
 
-    const parser = require('../controllers/parser-controller')(db);
+    const parser = require('../src/controllers/parser-controller')(db);
     router.post('/save', upload.array('files'), parser.parse);
 
-    const statsController = require('../controllers/stats-controller')(db);
+    const statsController = require('../src/controllers/stats-controller')(db);
     router.get('/stats', statsController.getStatsGlobal);
     router.get('/stats/:code', statsController.getStats);
     router.get('/totalGameCount', statsController.getTotalGameCount);
 
-    const maintenanceController = require('../controllers/maintenance-controller')();
+    const maintenanceController = require('../src/controllers/maintenance-controller')();
     router.get('/maintenance', maintenanceController.getMaintenance)
 
     return {

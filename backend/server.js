@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('./controllers/mongo-controller')();
+const db = require('./src/controllers/mongo-controller')();
 const routes = require('./config/routes')(db).router;
 const fs = require('fs');
 const path = require('path');
