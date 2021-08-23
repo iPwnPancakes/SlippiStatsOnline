@@ -3,13 +3,13 @@ import { config } from 'dotenv';
 
 const express = require('express');
 const cors = require('cors');
-// const db = require('../../../modules/SlippiGames/Repositories/Implementations/mongo-controller')();
-// const routes = require('./api/v1')(db).router;
+const db = require('../../../Controllers/mongo-controller');
 const fs = require('fs');
 const rimraf = require("rimraf");
 const logs = require('../../../../config/logger-config');
 const logger = logs.logger;
 const https = require('https');
+import { v1 } from './api/v1';
 import { v2 } from './api/v2';
 
 async function createApp() {
@@ -23,13 +23,17 @@ async function createApp() {
         throw new Error('MongoDB URI is not set');
     }
 
+    const v1DbController = db();
+    const v1Routes = v1(v1DbController).router;
+
     const dbConnection = await connectionFactory(mongoDbUri);
     const v2Routes = v2(dbConnection);
+
 
     app.use(cors());
     app.use(logs.requestLogger);
     app.use(logs.errorLogger);
-    // app.use('/api/v1', routes);
+    app.use('/api/v1', v1Routes);
     app.use('/api/v2', v2Routes);
 
     // Cleanup tmp directory

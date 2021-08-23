@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-export const v1 = (db) => {
+const v1 = (db) => {
     router.get('/health', function (req, res) {
         res.send({ status: 'UP' });
     });
@@ -30,3 +30,5 @@ export const v1 = (db) => {
         router
     }
 }
+
+module.exports = { v1 };
