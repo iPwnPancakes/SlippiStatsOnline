@@ -18,8 +18,8 @@
     "winston": "^3.3.3"
   },
   "scripts": {
-    "start": "node src/shared/Infrastructure/http/server.ts",
-    "dev": "nodemon src/shared/Infrastructure/http/server.ts"
+    "start": "ts-node src/shared/Infrastructure/http/server.ts",
+    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/shared/Infrastructure/http/server.ts'"
   },
   "author": "",
   "license": "ISC",
