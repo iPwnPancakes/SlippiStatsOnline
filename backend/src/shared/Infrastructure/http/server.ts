@@ -11,6 +11,7 @@ const logger = logs.logger;
 const https = require('https');
 import { v1 } from './api/v1';
 import { v2 } from './api/v2';
+import { GameModel } from "../database/mongodb/models/GameModel";
 
 async function createApp() {
     config();
@@ -23,10 +24,10 @@ async function createApp() {
         throw new Error('MongoDB URI is not set');
     }
 
-    const v1DbController = db();
-    const v1Routes = v1(v1DbController).router;
-
     const dbConnection = await connectionFactory(mongoDbUri);
+
+    const v1DbController = db(dbConnection, GameModel);
+    const v1Routes = v1(v1DbController).router;
     const v2Routes = v2(dbConnection);
 
 

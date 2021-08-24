@@ -12,6 +12,10 @@ export class Input {
         return this.cStickPosition;
     }
 
+    public getButtonsPressed(): string[] {
+        return this.buttonsPressed;
+    }
+
     public equals(otherInput: Input) {
         if (this.joystickPosition !== otherInput.getAnalogStickPosition()) {
             return false;

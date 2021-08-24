@@ -2,9 +2,9 @@ import { SlippiGame } from "../Domain/SlippiGame";
 import { PlayerTag } from "../Domain/PlayerTag";
 
 export interface ISlippiGameRepository {
-    getGamesByTag(tag: PlayerTag): SlippiGame[];
+    getGamesByTag(tag: PlayerTag): Promise<SlippiGame[]>;
 
-    getTotalGameCount(): number;
+    getTotalGameCount(): Promise<number>;
 
-    save(game: SlippiGame): void;
+    save(game: SlippiGame): Promise<string | number>;
 }

@@ -1,12 +1,20 @@
-import {Move} from "./Move";
-import {Input} from "./Input";
+import { Move } from "./Move";
+import { Input } from "./Input";
+import { Result } from "../../../shared/Core/Result";
+
+export interface MoveTimelineProps {
+    moves: Move[];
+}
 
 export class MoveTimeline {
-    private readonly moves: Move[];
+    public readonly props: MoveTimelineProps;
 
-    constructor(moves: Move[]) {
-        // TODO: Sort moves by timestamp
-        this.moves = moves.sort((a, b) => {
+    public static create(props: MoveTimelineProps): Result<MoveTimeline> {
+        return Result.ok(new MoveTimeline(props));
+    }
+
+    private constructor(props: MoveTimelineProps) {
+        props.moves = props.moves.sort((a, b) => {
             if (a.getTimestamp() > b.getTimestamp()) {
                 return 1;
             } else if (a.getTimestamp() < b.getTimestamp()) {
@@ -15,17 +23,19 @@ export class MoveTimeline {
 
             return 0;
         });
+
+        this.props = props;
     }
 
     public getMoveAtIndex(i: number) {
-        return this.moves[i];
+        return this.props.moves[i];
     }
 
     public getMoveAtTime(timestamp: Date) {
-        return this.moves.find(move => move.getTimestamp() === timestamp);
+        return this.props.moves.find(move => move.getTimestamp() === timestamp);
     }
 
     public getMovesWithInput(input: Input) {
-        return this.moves.filter(move => move.getInput().equals(input));
+        return this.props.moves.filter(move => move.getInput().equals(input));
     }
 }

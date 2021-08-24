@@ -1,27 +1,33 @@
 import { ISlippiGameRepository } from "../ISlippiGameRepository";
 import { SlippiGame } from "../../Domain/SlippiGame";
 import { Connection } from 'mongoose';
-import { GameModel } from '../../../../shared/Infrastructure/database/mongodb/models/mongo-config';
+import { GameModel } from '../../../../shared/Infrastructure/database/mongodb/models/GameModel';
 import { PlayerTag } from "../../Domain/PlayerTag";
+import { SlippiGameMapper } from "../../DataMappers/SlippiGameMapper";
 
 export class MongoDbSlippiGameRepository implements ISlippiGameRepository {
-    constructor(private connection: Connection) {
+    constructor(private connection: Connection, private slippiGameMapper: SlippiGameMapper) {
     }
 
-    getGamesByTag(tag: PlayerTag): SlippiGame[] {
-        return GameModel.find({ player1: tag.getTag() });
+    async getGamesByTag(tag: PlayerTag): Promise<SlippiGame[]> {
+        const games = await GameModel.find({ player1: tag.getTag() }).exec();
+
+        return Promise.resolve(games.map(game => {
+            const result = this.slippiGameMapper.toDomain(game);
+
+            if (result === null) {
+                throw new Error('Invalid SlippiGame');
+            }
+
+            return result;
+        }));
     }
 
-    getTotalGameCount(): number {
-        return GameModel.count({});
+    async getTotalGameCount(): Promise<number> {
+        return GameModel.count({}).exec();
     }
 
-    save(game: SlippiGame): void {
-        const model = GameModel.save({
-            _id: game.getID(),
-            player1: game.getPlayer1().getTag(),
-            player2: game.getPlayer2Data().getTag(),
-            stage: game.getStage().toString(),
-        });
+    async save(game: SlippiGame): Promise<string | number> {
+        return new GameModel(this.slippiGameMapper.toPersistence(game)).save().then(savedModel => savedModel._id);
     }
 }
