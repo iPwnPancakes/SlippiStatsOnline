@@ -12,8 +12,10 @@ export function createGameRouter(db: Connection): Router {
     const getGamesByTagUseCase = new GetGamesByTag(gamesRepository);
 
     GameRouter.get('/:tag', (req, res) => {
-        const games = getGamesByTagUseCase.execute({ playerTag: req.params.tag }).then(games => {
+        getGamesByTagUseCase.execute({ playerTag: req.params.tag }).then(games => {
             return res.json(games.map(game => game.getID()));
+        }).catch((err: Error) => {
+            return res.json({ errors: [err.message] });
         });
     });
 
