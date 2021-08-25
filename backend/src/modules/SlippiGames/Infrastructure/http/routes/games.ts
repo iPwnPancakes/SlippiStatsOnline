@@ -13,7 +13,7 @@ export function createGameRouter(db: Connection): Router {
 
     GameRouter.get('/:tag', (req, res) => {
         getGamesByTagUseCase.execute({ playerTag: req.params.tag }).then(games => {
-            return res.json(games.map(game => game.getID()));
+            return res.json(games.map(game => gamesMapper.toPersistence(game)));
         }).catch((err: Error) => {
             return res.status(500).json({ errors: [err.message] });
         });
