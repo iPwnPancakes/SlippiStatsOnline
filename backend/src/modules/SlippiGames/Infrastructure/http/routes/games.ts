@@ -15,7 +15,7 @@ export function createGameRouter(db: Connection): Router {
         getGamesByTagUseCase.execute({ playerTag: req.params.tag }).then(games => {
             return res.json(games.map(game => game.getID()));
         }).catch((err: Error) => {
-            return res.json({ errors: [err.message] });
+            return res.status(500).json({ errors: [err.message] });
         });
     });
 

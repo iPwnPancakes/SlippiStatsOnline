@@ -12,7 +12,7 @@ export class PlayerData {
             return Result.fail('Tag is required');
         }
 
-        if (!Characters[props.character]) {
+        if (!props.character) {
             return Result.fail('Invalid character');
         }
 

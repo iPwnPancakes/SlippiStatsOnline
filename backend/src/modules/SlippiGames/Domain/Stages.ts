@@ -1,8 +1,15 @@
 export enum Stages {
-    FOD = 'fountain_of_dreams',
-    STADIUM = 'pokemon_stadium',
-    YOSHIS = 'yoshis_story',
-    DREAMLAND = 'dreamland',
-    BATTLEFIELD = 'battlefield',
-    FD = 'final_destination'
+    FOD = 2,
+    STADIUM = 3,
+    YOSHIS = 3,
+    DREAMLAND = 28,
+    BATTLEFIELD = 31,
+    FD = 32
+}
+
+export function lookupStageByValue(stageCode: Number): Stages | null {
+    const keys = Object.keys(Stages);
+    const key = keys.find(key => Stages[key] === stageCode);
+
+    return Stages[key] ?? null;
 }
