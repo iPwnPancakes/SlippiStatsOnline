@@ -10,7 +10,7 @@ export class MongoDbSlippiGameRepository implements ISlippiGameRepository {
     }
 
     async getGamesByTag(tag: PlayerTag): Promise<SlippiGame[]> {
-        const games = await GameModel.find({ player1: tag.getTag() }).exec();
+        const games = await GameModel.find({ p1Tag: tag.toString() }).exec();
 
         return Promise.resolve(games.map(game => {
             const result = this.slippiGameMapper.toDomain(game);

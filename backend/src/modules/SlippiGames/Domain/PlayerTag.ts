@@ -1,7 +1,11 @@
 export class PlayerTag {
-    constructor(private tag: string) {}
+    private readonly tag: string;
 
-    getTag(): string {
+    constructor(tag: string) {
+        this.tag = tag.replace('-', '#');
+    }
+
+    toString(): string {
         return this.tag;
     }
 }
