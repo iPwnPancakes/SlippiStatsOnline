@@ -1,34 +1,30 @@
-import { MoveTimeline } from "./MoveTimeline";
 import { PlayerData } from "./PlayerData";
 import { Stages } from "./Stages";
 
+interface SlippiGameProps {
+    id: string,
+    player1Data: PlayerData;
+    player2Data: PlayerData;
+    stage: Stages;
+}
+
 export class SlippiGame {
-    constructor(
-        private id: string,
-        private player1Data: PlayerData,
-        private player2Data: PlayerData,
-        private stage: Stages,
-        private moveTimeline: MoveTimeline
-    ) {
+    constructor(public readonly props: SlippiGameProps) {
     }
 
     getID(): string {
-        return this.id;
+        return this.props.id;
     }
 
     getPlayer1(): PlayerData {
-        return this.player1Data;
+        return this.props.player1Data;
     }
 
     getPlayer2Data(): PlayerData {
-        return this.player2Data;
+        return this.props.player2Data;
     }
 
     getStage(): Stages {
-        return this.stage;
-    }
-
-    getMoveTimeline(): MoveTimeline {
-        return this.moveTimeline;
+        return this.props.stage;
     }
 }

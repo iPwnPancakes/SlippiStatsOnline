@@ -1,6 +1,5 @@
 import { SlippiGame } from "../Domain/SlippiGame";
 import { PlayerData } from "../Domain/PlayerData";
-import { MoveTimeline } from "../Domain/MoveTimeline";
 import { lookupStageByValue } from "../Domain/Stages";
 import { lookupCharacterByValue } from "../Domain/Characters";
 
@@ -11,19 +10,17 @@ export class SlippiGameMapper {
         const stage = lookupStageByValue(raw.stage);
         const player1Data = PlayerData.create({ tag: raw.p1Tag, character: p1Character });
         const player2Data = PlayerData.create({ tag: raw.p2Tag, character: p2Character });
-        const moveTimeline = MoveTimeline.create({ moves: raw.moves ?? [] });
 
-        if (player1Data.isFailure || player2Data.isFailure || !stage || moveTimeline.isFailure) {
+        if (player1Data.isFailure || player2Data.isFailure || !stage) {
             return null;
         }
 
-        return new SlippiGame(
-            raw.id,
-            player1Data.getValue(),
-            player2Data.getValue(),
-            stage,
-            moveTimeline.getValue()
-        );
+        return new SlippiGame({
+            id: raw.id,
+            player1Data: player1Data.getValue(),
+            player2Data: player2Data.getValue(),
+            stage: stage
+        });
     }
 
     public toPersistence(game: SlippiGame): any {
@@ -33,15 +30,7 @@ export class SlippiGameMapper {
             p1Character: game.getPlayer1().getCharacter().toString(),
             p2Tag: game.getPlayer2Data().getTag().toString(),
             p2Character: game.getPlayer2Data().getCharacter().toString(),
-            stage: game.getStage().toString(),
-            moves: game.getMoveTimeline().props.moves.map(move => ({
-                timestamp: move.getTimestamp(),
-                input: {
-                    analogStickPosition: move.getInput().getAnalogStickPosition(),
-                    cStickPosition: move.getInput().getCStickPosition(),
-                    buttons: move.getInput().getButtonsPressed()
-                }
-            }))
+            stage: game.getStage().toString()
         };
     }
 }
