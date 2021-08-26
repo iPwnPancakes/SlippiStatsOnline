@@ -1,11 +1,11 @@
-import { PlayerData } from "./PlayerData";
-import { Stages } from "./Stages";
+import { PlayerGameData } from "./PlayerGameData";
+import { SlippiGameMetadata } from "./SlippiGameMetadata";
 
 interface SlippiGameProps {
     id: string,
-    player1Data: PlayerData;
-    player2Data: PlayerData;
-    stage: Stages;
+    metadata: SlippiGameMetadata;
+    p1GameData: PlayerGameData;
+    p2GameData: PlayerGameData;
 }
 
 export class SlippiGame {
@@ -16,15 +16,15 @@ export class SlippiGame {
         return this.props.id;
     }
 
-    getPlayer1(): PlayerData {
-        return this.props.player1Data;
+    getP1GameData(): PlayerGameData {
+        return this.props.p1GameData;
     }
 
-    getPlayer2Data(): PlayerData {
-        return this.props.player2Data;
+    getP2GameData(): PlayerGameData {
+        return this.props.p2GameData;
     }
 
-    getStage(): Stages {
-        return this.props.stage;
+    getMetadata(): SlippiGameMetadata {
+        return this.props.metadata;
     }
 }

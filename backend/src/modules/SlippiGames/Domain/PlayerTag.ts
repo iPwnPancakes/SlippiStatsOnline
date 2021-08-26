@@ -1,11 +1,25 @@
-export class PlayerTag {
-    private readonly tag: string;
+import { Result } from "../../../shared/Core/Result";
 
-    constructor(tag: string) {
-        this.tag = tag.replace('-', '#');
+interface PlayerTagProps {
+    tag: string;
+}
+
+export class PlayerTag {
+    public static create(props: PlayerTagProps): Result<PlayerTag> {
+        if (props.tag.length === 0) {
+            return Result.fail('Tag cannot be empty');
+        }
+
+        return Result.ok(new PlayerTag(props));
     }
 
-    toString(): string {
-        return this.tag;
+    constructor(public readonly props: PlayerTagProps) {}
+
+    public isEmpty(): boolean {
+        return this.props.tag === '';
+    }
+
+    public toString(): string {
+        return this.props.tag;
     }
 }
