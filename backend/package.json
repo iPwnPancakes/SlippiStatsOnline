@@ -1,32 +1,35 @@
 {
-  "name": "SlippiStatsBackend",
-  "version": "2.0.0",
-  "description": "",
-  "main": "src/shared/Infrastructure/http/httpServer.ts",
-  "dependencies": {
-    "@slippi/slippi-js": "^5.0.3",
-    "adm-zip": "^0.5.1",
-    "apollo-server": "^3.3.0",
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "express-winston": "^4.0.5",
-    "graphql": "^15.5.1",
-    "mongodb": "^3.5.9",
-    "mongoose": "^5.13.7",
-    "multer": "^1.4.2",
-    "nodemon": "^2.0.4",
-    "rimraf": "^3.0.2",
-    "winston": "^3.3.3"
-  },
-  "scripts": {
-    "start": "ts-node src/shared/Infrastructure/http/httpServer.ts",
-    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/shared/Infrastructure/http/httpServer.ts'"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "ts-node": "^10.2.1"
-  }
+    "name": "SlippiStatsBackend",
+    "version": "2.0.0",
+    "description": "",
+    "main": "src/shared/Infrastructure/http/httpServer.ts",
+    "dependencies": {
+        "@slippi/slippi-js": "^5.0.3",
+        "adm-zip": "^0.5.1",
+        "apollo-server": "^3.3.0",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "express-winston": "^4.0.5",
+        "graphql": "^15.5.1",
+        "graphql-scalars": "^1.10.0",
+        "mongodb": "^3.5.9",
+        "mongoose": "^5.13.7",
+        "multer": "^1.4.2",
+        "nodemon": "^2.0.4",
+        "rimraf": "^3.0.2",
+        "winston": "^3.3.3"
+    },
+    "scripts": {
+        "start:http": "ts-node src/shared/Infrastructure/http/httpServer.ts",
+        "start:graphql": "ts-node src/shared/Infrastructure/http/graphqlServer.ts",
+        "dev:http": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/shared/Infrastructure/http/httpServer.ts'",
+        "dev:graphql": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/shared/Infrastructure/http/graphqlServer.ts'"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "ts-node": "^10.2.1"
+    }
 }
