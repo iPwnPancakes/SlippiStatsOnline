@@ -1,5 +1,5 @@
 import { Characters } from "./Characters";
-import { Result } from "../Core/Result";
+import { Result } from "../core/Result";
 import { Player } from "./Player";
 
 interface PlayerGameDataProps {

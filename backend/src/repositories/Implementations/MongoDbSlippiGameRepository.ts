@@ -1,8 +1,8 @@
 import { ISlippiGameRepository } from "../ISlippiGameRepository";
-import { SlippiGame } from "../../Models/SlippiGame";
+import { SlippiGame } from "../../models/SlippiGame";
 import { Connection } from 'mongoose';
 import { GameModel } from '../../database/mongodb/models/GameModel';
-import { PlayerTag } from "../../Models/PlayerTag";
+import { PlayerTag } from "../../models/PlayerTag";
 import { SlippiGameMapper } from "../DataMappers/SlippiGameMapper";
 
 export class MongoDbSlippiGameRepository implements ISlippiGameRepository {

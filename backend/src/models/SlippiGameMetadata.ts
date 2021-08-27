@@ -1,6 +1,6 @@
 import { Player } from "./Player";
 import { lookupStageByValue, Stages } from "./Stages";
-import { Result } from "../Core/Result";
+import { Result } from "../core/Result";
 
 interface SlippiGameMetadataProps {
     date: Date;

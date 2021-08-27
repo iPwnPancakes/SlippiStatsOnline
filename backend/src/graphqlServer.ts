@@ -6,13 +6,13 @@ import { PlayerGameData } from "./graphql/typeDefs/PlayerGameData";
 import { SlippiGameMetadata } from "./graphql/typeDefs/SlippiGameMetadata";
 import { SlippiGame } from "./graphql/typeDefs/SlippiGame";
 import { DateTimeResolver, DateTimeTypeDefinition } from "graphql-scalars";
-import { GetGamesByTag } from "./UseCases/GetGamesByTag/GetGamesByTag";
+import { GetGamesByTag } from "./commands/GetGamesByTag/GetGamesByTag";
 import { connectionFactory } from "./database/mongodb/connectionFactory";
-import { MongoDbSlippiGameRepository } from "./Repositories/Implementations/MongoDbSlippiGameRepository";
-import { SlippiGameMapper } from "./Repositories/DataMappers/SlippiGameMapper";
+import { MongoDbSlippiGameRepository } from "./repositories/Implementations/MongoDbSlippiGameRepository";
+import { SlippiGameMapper } from "./repositories/DataMappers/SlippiGameMapper";
 import { config } from 'dotenv';
-import { Characters } from "./Models/Characters";
-import { Stages } from "./Models/Stages";
+import { Characters } from "./models/Characters";
+import { Stages } from "./models/Stages";
 
 const basicTypeDefs = gql`
     scalar DateTime

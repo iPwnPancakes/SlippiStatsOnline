@@ -1,10 +1,10 @@
-import { UseCase } from "../../Core/UseCase";
+import { UseCase } from "../../core/UseCase";
 import { GetGamesByTagDTO } from "./GetGamesByTagDTO";
-import { ISlippiGameRepository } from "../../Repositories/ISlippiGameRepository";
-import { PlayerTag } from "../../Models/PlayerTag";
+import { ISlippiGameRepository } from "../../repositories/ISlippiGameRepository";
+import { PlayerTag } from "../../models/PlayerTag";
 import { GetGamesByTagResponse } from "./GetGamesByTagResponse";
-import { left, right } from "../../Core/Either";
-import { Result } from "../../Core/Result";
+import { left, right } from "../../core/Either";
+import { Result } from "../../core/Result";
 
 export class GetGamesByTag implements UseCase<GetGamesByTagDTO, Promise<GetGamesByTagResponse>> {
     constructor(private gameRepository: ISlippiGameRepository) {}

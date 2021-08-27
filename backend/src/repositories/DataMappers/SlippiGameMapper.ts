@@ -1,11 +1,11 @@
-import { SlippiGame } from "../../Models/SlippiGame";
-import { PlayerGameData } from "../../Models/PlayerGameData";
-import { Player } from "../../Models/Player";
-import { PlayerTag } from "../../Models/PlayerTag";
-import { Characters, lookupCharacterByValue } from "../../Models/Characters";
-import { Result } from "../../Core/Result";
-import { SlippiGameMetadata } from "../../Models/SlippiGameMetadata";
-import { lookupStageByValue } from "../../Models/Stages";
+import { SlippiGame } from "../../models/SlippiGame";
+import { PlayerGameData } from "../../models/PlayerGameData";
+import { Player } from "../../models/Player";
+import { PlayerTag } from "../../models/PlayerTag";
+import { Characters, lookupCharacterByValue } from "../../models/Characters";
+import { Result } from "../../core/Result";
+import { SlippiGameMetadata } from "../../models/SlippiGameMetadata";
+import { lookupStageByValue } from "../../models/Stages";
 
 export class SlippiGameMapper {
     public toDomain(raw: any): SlippiGame | null {

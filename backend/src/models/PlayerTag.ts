@@ -1,4 +1,4 @@
-import { Result } from "../Core/Result";
+import { Result } from "../core/Result";
 
 interface PlayerTagProps {
     tag: string;

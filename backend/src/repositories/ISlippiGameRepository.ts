@@ -1,5 +1,5 @@
-import { SlippiGame } from "../Models/SlippiGame";
-import { PlayerTag } from "../Models/PlayerTag";
+import { SlippiGame } from "../models/SlippiGame";
+import { PlayerTag } from "../models/PlayerTag";
 
 export interface ISlippiGameRepository {
     getGamesByTag(tag: PlayerTag): Promise<SlippiGame[]>;

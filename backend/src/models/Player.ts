@@ -1,5 +1,5 @@
 import { PlayerTag } from "./PlayerTag";
-import { Result } from "../Core/Result";
+import { Result } from "../core/Result";
 
 interface PlayerProps {
     username: string;
