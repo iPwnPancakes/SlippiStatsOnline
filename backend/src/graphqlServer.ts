@@ -6,7 +6,7 @@ import { PlayerGameData } from "./graphql/typeDefs/PlayerGameData";
 import { SlippiGameMetadata } from "./graphql/typeDefs/SlippiGameMetadata";
 import { SlippiGame } from "./graphql/typeDefs/SlippiGame";
 import { DateTimeResolver, DateTimeTypeDefinition } from "graphql-scalars";
-import { GetGamesByTag } from "./UseCases/GameMatches/GetGamesByTag/GetGamesByTag";
+import { GetGamesByTag } from "./UseCases/GetGamesByTag/GetGamesByTag";
 import { connectionFactory } from "./database/mongodb/connectionFactory";
 import { MongoDbSlippiGameRepository } from "./Repositories/Implementations/MongoDbSlippiGameRepository";
 import { SlippiGameMapper } from "./Repositories/DataMappers/SlippiGameMapper";

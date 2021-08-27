@@ -34,8 +34,8 @@ async function createApp() {
     app.use(cors());
     app.use(logs.requestLogger);
     app.use(logs.errorLogger);
-    app.use('/restApi/v1', v1Routes);
-    app.use('/restApi/v2', v2Routes);
+    app.use('/api/v1', v1Routes);
+    app.use('/api/v2', v2Routes);
 
     // Cleanup tmp directory
     rimraf('./tmp', () => {
