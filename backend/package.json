@@ -2,7 +2,7 @@
     "name": "slippi-stats-backend",
     "version": "2.0.0",
     "description": "",
-    "main": "src/shared/Infrastructure/http/httpServer.ts",
+    "main": "src/httpServer.ts",
     "dependencies": {
         "@slippi/slippi-js": "^5.0.3",
         "adm-zip": "^0.5.1",
@@ -21,10 +21,10 @@
         "winston": "^3.3.3"
     },
     "scripts": {
-        "start:http": "ts-node src/shared/Infrastructure/http/httpServer.ts",
-        "start:graphql": "ts-node src/shared/Infrastructure/http/graphqlServer.ts",
-        "dev:http": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/shared/Infrastructure/http/httpServer.ts'",
-        "dev:graphql": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/shared/Infrastructure/http/graphqlServer.ts'"
+        "start:http": "ts-node src/httpServer.ts",
+        "start:graphql": "ts-node src/graphqlServer.ts",
+        "dev:http": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/httpServer.ts'",
+        "dev:graphql": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/graphqlServer.ts'"
     },
     "author": "",
     "license": "ISC",
