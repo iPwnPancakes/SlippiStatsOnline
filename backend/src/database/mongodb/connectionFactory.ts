@@ -1,11 +1,15 @@
 import { Connection, connect, ConnectionOptions, connection } from 'mongoose';
 
-export function connectionFactory(uri: string, options?: ConnectionOptions): Promise<Connection> {
-    return connect(uri, {
+export async function connectionFactory(uri: string, options?: ConnectionOptions): Promise<Connection> {
+    await connect(uri, {
         ...options,
         useNewUrlParser: true,
         useUnifiedTopology: true
-    }).then(() => connection).catch((err) => {
-        throw new Error(err ?? 'Could not establish connection to MongoDB');
     });
+
+    if (!connection) {
+        throw new Error('Could not establish connection to MongoDB');
+    }
+
+    return connection;
 }
