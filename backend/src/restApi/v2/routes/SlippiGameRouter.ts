@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { Connection } from 'mongoose';
-import { GetGamesByTag } from "../../commands/GetGamesByTag/GetGamesByTag";
-import { MongoDbSlippiGameRepository } from "../../repositories/Implementations/MongoDbSlippiGameRepository";
-import { SlippiGameMapper } from "../../repositories/DataMappers/SlippiGameMapper";
-import { GetGamesByTagResponse } from "../../commands/GetGamesByTag/GetGamesByTagResponse";
+import { GetGamesByTag } from "../../../commands/GetGamesByTag/GetGamesByTag";
+import { MongoDbSlippiGameRepository } from "../../../repositories/Implementations/MongoDbSlippiGameRepository";
+import { SlippiGameMapper } from "../../../repositories/DataMappers/SlippiGameMapper";
+import { GetGamesByTagResponse } from "../../../commands/GetGamesByTag/GetGamesByTagResponse";
 
-export function createGameRouter(db: Connection): Router {
+export function createSlippiGameRouter(db: Connection): Router {
     const GameRouter = Router();
 
     const gamesMapper = new SlippiGameMapper();

@@ -3,14 +3,14 @@ import { config } from 'dotenv';
 
 const express = require('express');
 const cors = require('cors');
-const db = require('./restApi/Controllers/mongo-controller');
+const db = require('./restApi/v1/Controllers/mongo-controller');
 const fs = require('fs');
 const rimraf = require("rimraf");
 const logs = require('../config/logger-config');
 const logger = logs.logger;
 const https = require('https');
-import { v1 } from './restApi/v1';
-import { v2 } from './restApi/v2';
+import { v1 } from './restApi/v1/v1';
+import { v2 } from './restApi/v2/v2';
 import { GameModel } from "./database/mongodb/models/GameModel";
 
 async function createApp() {

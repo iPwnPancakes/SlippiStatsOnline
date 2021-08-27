@@ -1,4 +1,4 @@
-const logger = require('../../../config/logger-config').logger;
+const logger = require('../../../../config/logger-config').logger;
 
 const mongo = (dbConnection, GameModel) => {
     dbConnection.on('error', (err) => {

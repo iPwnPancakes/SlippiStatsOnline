@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-export function createDiagnosticsRoutes(): Router {
+export function createDiagnosticsRouter(): Router {
     let router = Router();
 
     router.get('/isUp', (req, res) => {
