@@ -9,15 +9,15 @@ import { lookupStageByValue } from "../Domain/Stages";
 
 export class SlippiGameMapper {
     public toDomain(raw: any): SlippiGame | null {
-        const p1Tag = PlayerTag.create({ tag: raw.p1Code });
-        const p2Tag = PlayerTag.create({ tag: raw.p2Code });
+        const p1Tag = PlayerTag.create({ tag: raw.p1Tag });
+        const p2Tag = PlayerTag.create({ tag: raw.p2Tag });
 
         if (p1Tag.isFailure || p2Tag.isFailure) {
             return null;
         }
 
-        const p1 = Player.create({ tag: p1Tag.getValue(), username: raw.p1Tag });
-        const p2 = Player.create({ tag: p2Tag.getValue(), username: raw.p2Tag });
+        const p1 = Player.create({ tag: p1Tag.getValue(), username: raw.p1Code });
+        const p2 = Player.create({ tag: p2Tag.getValue(), username: raw.p2Code });
 
         if (p1.isFailure || p2.isFailure) {
             return null;
@@ -124,5 +124,54 @@ export class SlippiGameMapper {
             [`p${ playerNumber }BeneficialTrades`]: playerGameData.props.totalBeneficialTrades,
             [`p${ playerNumber }NegativeTrades`]: playerGameData.props.totalNegativeTrades,
         };
+    }
+
+    public toDTO(game: SlippiGame): any {
+        return {
+            id: game.getID(),
+            metadata: SlippiGameMapper.metadataToDTO(game.getMetadata()),
+            playerStats: [
+                SlippiGameMapper.playerGameDataToDTO(game.getP1GameData()),
+                SlippiGameMapper.playerGameDataToDTO(game.getP2GameData())
+            ]
+        };
+    }
+
+    private static metadataToDTO(metadata: SlippiGameMetadata): any {
+        return {
+            win: SlippiGameMapper.playerToDTO(metadata.getWinner()),
+            lraStart: metadata.wasLraStarted(),
+            timeout: metadata.wasTimeout(),
+            stage: metadata.getStage(),
+            date: metadata.getDate(),
+            totalFrames: metadata.getTotalFrames()
+        };
+    }
+
+    private static playerToDTO(player: Player): any {
+        return {
+            username: player.username,
+            tag: player.tag.toString()
+        };
+    }
+
+    private static playerGameDataToDTO(playerGameData: PlayerGameData): any {
+        return {
+            player: SlippiGameMapper.playerToDTO(playerGameData.getPlayer()),
+            character: playerGameData.getCharacter(),
+            stocksTaken: playerGameData.props.stocksTaken,
+            stocksLost: playerGameData.props.stocksLost,
+            apm: playerGameData.props.apm,
+            totalDamageDealt: playerGameData.props.totalPercentDamage,
+            totalOpenings: playerGameData.props.totalOpenings,
+            totalNeutralInteractionsWon: playerGameData.props.totalNeutralInteractionsWon,
+            totalNeutralInteractionsLost: playerGameData.props.totalNeutralInteractionsLost,
+            totalSuccessfulConversions: playerGameData.props.totalSuccessfulConversions,
+            totalMissedConversions: playerGameData.props.totalMissedConversions,
+            totalCounterHits: playerGameData.props.totalCounterHits,
+            totalNegativeCounterHits: playerGameData.props.totalNegativeCounterHits,
+            totalBeneficialTrades: playerGameData.props.totalBeneficialTrades,
+            totalNegativeTrades: playerGameData.props.totalNegativeTrades,
+        }
     }
 }

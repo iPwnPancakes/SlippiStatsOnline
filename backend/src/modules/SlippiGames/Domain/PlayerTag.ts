@@ -10,6 +10,10 @@ export class PlayerTag {
             return Result.fail('Tag cannot be empty');
         }
 
+        if(props.tag.length > 8) {
+            return Result.fail('Tag cannot be greater than 8 characters');
+        }
+
         return Result.ok(new PlayerTag(props));
     }
 
