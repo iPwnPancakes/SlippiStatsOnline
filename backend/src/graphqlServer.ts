@@ -5,14 +5,14 @@ import { Player } from "./graphql/typeDefs/Player";
 import { PlayerGameData } from "./graphql/typeDefs/PlayerGameData";
 import { SlippiGameMetadata } from "./graphql/typeDefs/SlippiGameMetadata";
 import { SlippiGame } from "./graphql/typeDefs/SlippiGame";
-import { DateTimeResolver, DateTimeTypeDefinition } from "graphql-scalars";
+import { DateTimeResolver } from "graphql-scalars";
 import { GetGamesByTag } from "./commands/GetGamesByTag/GetGamesByTag";
 import { connectionFactory } from "./database/mongodb/connectionFactory";
 import { MongoDbSlippiGameRepository } from "./repositories/Implementations/MongoDbSlippiGameRepository";
 import { SlippiGameMapper } from "./repositories/DataMappers/SlippiGameMapper";
 import { config } from 'dotenv';
-import { Characters } from "./models/Characters";
-import { Stages } from "./models/Stages";
+import { toObject as charactersToObject } from "./models/Characters";
+import { toObject as stagesToObject } from "./models/Stages";
 
 const basicTypeDefs = gql`
     scalar DateTime
@@ -46,42 +46,8 @@ async function createGraphQlServer(): Promise<ApolloServer> {
         ],
         resolvers: {
             DateTime: DateTimeResolver,
-            Character: {
-                C_FALCON: 0,
-                DK: 1,
-                FOX: 2,
-                GAME_WATCH: 3,
-                KIRBY: 4,
-                BOWSER: 5,
-                LINK: 6,
-                LUIGI: 7,
-                MARIO: 8,
-                MARTH: 9,
-                MEWTWO: 10,
-                NESS: 11,
-                PEACH: 12,
-                PIKACHU: 13,
-                ICE_CLIMBERS: 14,
-                JIGGLYPUFF: 15,
-                SAMUS: 16,
-                YOSHI: 17,
-                ZELDA: 18,
-                SHEIK: 19,
-                FALCO: 20,
-                Y_LINK: 21,
-                DR_MARIO: 22,
-                ROY: 23,
-                PICHU: 24,
-                GANON: 25
-            },
-            Stage: {
-                FOD: 2,
-                STADIUM: 3,
-                YOSHIS: 3,
-                DREAMLAND: 28,
-                BATTLEFIELD: 31,
-                FD: 32
-            },
+            Character: charactersToObject(),
+            Stage: stagesToObject(),
             Query: {
                 async GetSlippiGamesByTag(_, args) {
                     const response = await getGamesByTagUseCase.execute({ playerTag: args.tag });
