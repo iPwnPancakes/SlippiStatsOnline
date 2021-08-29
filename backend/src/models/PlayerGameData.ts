@@ -6,7 +6,7 @@ interface PlayerGameDataProps {
     player: Player;
     character: Characters;
     stocksTaken: Number;
-    stocksLost: Number;
+    stocksRemaining: Number;
     apm: Number;
     totalPercentDamage: Number;
     totalOpenings: Number;

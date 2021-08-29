@@ -5,7 +5,7 @@ export const PlayerGameData = gql`
         player: Player
         character: Character
         stocksTaken: Int
-        stocksLost: Int
+        stocksRemaining: Int
         apm: Float
         totalDamageDealt: Float
         totalOpenings: Int
