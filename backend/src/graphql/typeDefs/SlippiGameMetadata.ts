@@ -8,5 +8,6 @@ export const SlippiGameMetadata = gql`
         stage: Stage
         date: DateTime
         totalFrames: Int
+        fourStock: Boolean
     }
 `;

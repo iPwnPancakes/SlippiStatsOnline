@@ -50,6 +50,7 @@ const GameSchema = new Schema<Game>({
     stage: Number,
     date: Date,
     numFrames: Number,
+    fourStocks: Boolean,
 
     p1Code: String,
     p1Tag: String,

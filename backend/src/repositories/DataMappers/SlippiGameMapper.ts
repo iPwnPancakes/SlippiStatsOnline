@@ -52,6 +52,7 @@ export class SlippiGameMapper {
             victoriousPlayer: playerWinNumber === 1 ? p1.getValue() : p2.getValue(),
             lraStart: raw.lraStart,
             timeout: raw.timeout,
+            wasFourStock: raw.fourStocks,
             stage: stage,
             totalFrames: raw.numFrames
         });
@@ -80,6 +81,7 @@ export class SlippiGameMapper {
             stage: metadata.getStage(),
             date: metadata.getDate(),
             numFrames: metadata.getTotalFrames(),
+            fourStocks: metadata.props.wasFourStock,
             ...SlippiGameMapper.playerGameDataToPersistence(1, game.getP1GameData()),
             ...SlippiGameMapper.playerGameDataToPersistence(2, game.getP2GameData())
         };
@@ -144,7 +146,8 @@ export class SlippiGameMapper {
             timeout: metadata.wasTimeout(),
             stage: metadata.getStage(),
             date: metadata.getDate(),
-            totalFrames: metadata.getTotalFrames()
+            totalFrames: metadata.getTotalFrames(),
+            fourStock: metadata.props.wasFourStock
         };
     }
 

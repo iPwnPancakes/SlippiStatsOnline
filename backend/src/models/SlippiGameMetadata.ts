@@ -7,6 +7,7 @@ interface SlippiGameMetadataProps {
     victoriousPlayer: Player;
     lraStart: boolean;
     timeout: boolean;
+    wasFourStock: boolean;
     stage: Stages;
     totalFrames: number;
 }
