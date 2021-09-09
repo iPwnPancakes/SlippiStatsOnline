@@ -87,6 +87,17 @@ export class SlippiGameMapper {
         };
     }
 
+    public toDTO(game: SlippiGame): any {
+        return {
+            id: game.getID(),
+            metadata: SlippiGameMapper.metadataToDTO(game.getMetadata()),
+            playerStats: [
+                SlippiGameMapper.playerGameDataToDTO(game.getP1GameData()),
+                SlippiGameMapper.playerGameDataToDTO(game.getP2GameData())
+            ]
+        };
+    }
+
     private static rawToPlayerGameData(playerNumber: number, player: Player, character: Characters, raw: any): Result<PlayerGameData> {
         return PlayerGameData.create({
             player,
@@ -125,17 +136,6 @@ export class SlippiGameMapper {
             [`p${ playerNumber }NegativeCounterHits`]: playerGameData.props.totalNegativeCounterHits,
             [`p${ playerNumber }BeneficialTrades`]: playerGameData.props.totalBeneficialTrades,
             [`p${ playerNumber }NegativeTrades`]: playerGameData.props.totalNegativeTrades,
-        };
-    }
-
-    public toDTO(game: SlippiGame): any {
-        return {
-            id: game.getID(),
-            metadata: SlippiGameMapper.metadataToDTO(game.getMetadata()),
-            playerStats: [
-                SlippiGameMapper.playerGameDataToDTO(game.getP1GameData()),
-                SlippiGameMapper.playerGameDataToDTO(game.getP2GameData())
-            ]
         };
     }
 

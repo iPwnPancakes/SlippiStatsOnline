@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "description": "",
     "dependencies": {
-        "@slippi/slippi-js": "^5.0.3",
+        "@slippi/slippi-js": "^6.1.2",
         "adm-zip": "^0.5.1",
         "apollo-server": "^3.3.0",
         "cors": "^2.8.5",
