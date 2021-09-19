@@ -32,4 +32,8 @@ export class MongoDbSlippiGameRepository implements ISlippiGameRepository {
 
         return persistenceModel._id;
     }
+
+    async saveBulk(games: SlippiGame[]): Promise<(string | number)[]> {
+        return Promise.all(games.map((game) => this.save(game)));
+    }
 }

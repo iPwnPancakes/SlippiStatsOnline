@@ -1,10 +1,11 @@
-import { UseCase } from "../../core/UseCase";
-import { left, right } from "../../core/Either";
-import { FileParserFactory } from "../../services/SlippiFileParser/FileParserFactory";
-import { File } from "../../models/File";
-import { ISlippiGameRepository } from "../../repositories/ISlippiGameRepository";
-import { UploadSlippiGamesResponse } from "./UploadSlippiGamesResponse";
-import { UploadSlippiGamesErrors } from "./UploadSlippiGamesErrors";
+import { UseCase } from '../../core/UseCase';
+import { left, right } from '../../core/Either';
+import { FileParserFactory } from '../../services/SlippiFileParser/FileParserFactory';
+import { File } from '../../models/File';
+import { ISlippiGameRepository } from '../../repositories/ISlippiGameRepository';
+import { UploadSlippiGamesResponse } from './UploadSlippiGamesResponse';
+import { FileNotParseableError, UnsupportedFileParserError } from './UploadSlippiGamesErrors';
+import { Result } from '../../core/Result';
 
 export class UploadSlippiGames implements UseCase<UploadSlippiGamesDTO, Promise<UploadSlippiGamesResponse>> {
     public constructor(
@@ -12,8 +13,8 @@ export class UploadSlippiGames implements UseCase<UploadSlippiGamesDTO, Promise<
         private slippiGameRepository: ISlippiGameRepository
     ) {}
 
-    async execute(request: UploadSlippiGamesDTO): Promise<UploadSlippiGamesResponse> {
-        const createFileModelResult = File.create({ extension: request.extension, data: request.data });
+    async execute({ extension, data, filename }: UploadSlippiGamesDTO): Promise<UploadSlippiGamesResponse> {
+        const createFileModelResult = File.create({ extension, data, filename });
         if (createFileModelResult.isFailure) {
             return left(createFileModelResult);
         }
@@ -22,16 +23,17 @@ export class UploadSlippiGames implements UseCase<UploadSlippiGamesDTO, Promise<
         const parser = this.parserFactory.makeParser(file);
 
         if (parser === null) {
-            return left(new UploadSlippiGamesErrors.UnsupportedFileParserError());
+            return left(new UnsupportedFileParserError());
         }
 
         const parseResult = parser.parse(file);
-        if (parseResult.isLeft()) {
-            return left(new UploadSlippiGamesErrors.FileNotParseableError());
+        if (parseResult.isFailure) {
+            return left(new FileNotParseableError());
         }
 
-        await this.slippiGameRepository.saveBulk(parseResult.value);
+        const response = parseResult.getValue();
+        await this.slippiGameRepository.saveBulk(response.games);
 
-        return right(null);
+        return right(Result.ok(null));
     }
 }

@@ -8,5 +8,5 @@ export interface ISlippiGameRepository {
 
     save(game: SlippiGame): Promise<string | number>;
 
-    saveBulk(games: SlippiGame[]): Promise<string[] | number[]>;
+    saveBulk(games: SlippiGame[]): Promise<(string | number)[]>;
 }
