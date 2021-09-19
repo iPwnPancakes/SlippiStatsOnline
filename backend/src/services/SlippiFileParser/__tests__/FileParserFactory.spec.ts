@@ -25,7 +25,6 @@ describe('Services: FileParserFactory', () => {
         const slippiGameFactory = new Mock<SlippiGameFactory>().object();
         const parserFactory = new FileParserFactory(slippiGameFactory);
 
-        const fakeBuffer = new Mock<Buffer>().object();
         const file = new Mock<File>()
             .setup(file => file.extension)
             .returns(SupportedFileExtensionEnum.ZIP)
