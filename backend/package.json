@@ -1,34 +1,44 @@
 {
-    "name": "slippi-stats-backend",
-    "version": "2.0.0",
-    "description": "",
-    "dependencies": {
-        "@slippi/slippi-js": "^6.1.2",
-        "adm-zip": "^0.5.1",
-        "apollo-server": "^3.3.0",
-        "cors": "^2.8.5",
-        "dotenv": "^10.0.0",
-        "express": "^4.17.1",
-        "express-winston": "^4.0.5",
-        "graphql": "^15.5.1",
-        "graphql-scalars": "^1.10.0",
-        "mongodb": "^3.5.9",
-        "mongoose": "^5.13.7",
-        "multer": "^1.4.2",
-        "nodemon": "^2.0.4",
-        "rimraf": "^3.0.2",
-        "winston": "^3.3.3"
-    },
-    "scripts": {
-        "start:http": "ts-node src/httpServer.ts",
-        "start:graphql": "ts-node src/graphqlServer.ts",
-        "dev:http": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/httpServer.ts'",
-        "dev:graphql": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/graphqlServer.ts'"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@types/express": "^4.17.13",
-        "ts-node": "^10.2.1"
-    }
+  "name": "slippi-stats-backend",
+  "version": "2.0.0",
+  "description": "",
+  "dependencies": {
+    "@slippi/slippi-js": "^6.1.2",
+    "adm-zip": "^0.5.1",
+    "apollo-server": "^3.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-winston": "^4.0.5",
+    "graphql": "^15.5.1",
+    "graphql-scalars": "^1.10.0",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.13.7",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "winston": "^3.3.3"
+  },
+  "scripts": {
+    "start:http": "ts-node src/httpServer.ts",
+    "start:graphql": "ts-node src/graphqlServer.ts",
+    "dev:http": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/httpServer.ts'",
+    "dev:graphql": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/graphqlServer.ts'",
+    "test:unit": "jest",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.1",
+    "babel-jest": "^27.2.0",
+    "jest": "^27.2.0",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
 }
