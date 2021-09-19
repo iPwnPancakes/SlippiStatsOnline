@@ -1,17 +1,20 @@
-import { SlippiGame as SlippiGameFile } from "@slippi/slippi-js";
-import { ISlippiFileParser, ParseResult } from "./ISlippiFileParser";
-import { File } from "../../../models/File";
-import { Result } from "../../../core/Result";
-import { SlippiGameFactory } from "../../../models/SlippiGameFactory";
+import { ISlippiFileParser, ParseResult } from './ISlippiFileParser';
+import { File } from '../../../models/File';
+import { Result } from '../../../core/Result';
+import { SlippiGameFactory } from '../../../models/SlippiGameFactory';
+import { SlippiJsGameFactory } from './SlippiJsGameFactory';
 
 export class SlpFileParser implements ISlippiFileParser {
-    constructor(private slippiGameFactory: SlippiGameFactory) {}
+    constructor(
+        private slippiGameFactory: SlippiGameFactory,
+        private slippiJsGameFactory: SlippiJsGameFactory
+    ) {}
 
     parse(file: File): Result<ParseResult> {
-        let game: SlippiGameFile;
+        let game;
 
         try {
-            game = new SlippiGameFile(file.props.data);
+            game = this.slippiJsGameFactory.fromBuffer(file.props.data);
         } catch (e) {
             console.error(e);
             return Result.fail('Could not parse the file');
