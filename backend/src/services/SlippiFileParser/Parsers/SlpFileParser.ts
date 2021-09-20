@@ -3,11 +3,13 @@ import { File } from '../../../models/File';
 import { Result } from '../../../core/Result';
 import { SlippiGameFactory } from '../../../models/SlippiGameFactory';
 import { SlippiJsGameFactory } from './SlippiJsGameFactory';
+import { SlippiJsGameMapper } from './SlippiJsGameMapper';
 
 export class SlpFileParser implements ISlippiFileParser {
     constructor(
         private slippiGameFactory: SlippiGameFactory,
-        private slippiJsGameFactory: SlippiJsGameFactory
+        private slippiJsGameFactory: SlippiJsGameFactory,
+        private slippiJsGameMapper: SlippiJsGameMapper
     ) {}
 
     parse(file: File): Result<ParseResult> {
@@ -20,24 +22,7 @@ export class SlpFileParser implements ISlippiFileParser {
             return Result.fail('Could not parse the file');
         }
 
-        const player1 = game.getSettings().players[0];
-        const player2 = game.getSettings().players[1];
-
-        const players = {
-            player1: {
-                username: player1.displayName,
-                tag: player1.nametag
-            },
-            player2: {
-                username: player2.displayName,
-                tag: player1.nametag
-            }
-        };
-
-        const dto = { players };
-
-        const createSlippiModelResult = this.slippiGameFactory.createFromDTO(dto);
-
+        const createSlippiModelResult = this.slippiJsGameMapper.toDomainModel(game);
         if (createSlippiModelResult.isFailure) {
             return Result.fail(createSlippiModelResult.error.toString());
         }
