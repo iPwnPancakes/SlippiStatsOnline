@@ -56,5 +56,30 @@ describe('Services: SlippiFileParser/Parsers/SlpFileParser', () => {
         expect(result.error).toBe(failedMapResult.error);
     });
 
-    test.todo('should return a slippi game domain model');
+    test('should return a single slippi game domain model', () => {
+        const fakeDomainModel = new Mock<SlippiGameDomainModel>().object();
+
+        const fakeSlippiJsGame = new Mock<SlippiGame>().object();
+        const slippiGameFactory = new Mock<SlippiGameFactory>().object();
+        const slippiJsGameFactory = new Mock<SlippiJsGameFactory>()
+            .setup(factory => factory.fromBuffer(It.IsAny()))
+            .returns(fakeSlippiJsGame)
+            .object();
+        const slippiJsGameMapper = new Mock<SlippiJsGameMapper>()
+            .setup(mapper => mapper.toDomainModel(It.IsAny()))
+            .returns(Result.ok(fakeDomainModel))
+            .object();
+
+        const fakeBuffer = new Mock<Buffer>().object();
+        const file = new Mock<File>()
+            .setup(file => file.props)
+            .returns({ filename: '', extension: SupportedFileExtensionEnum.SLP, data: fakeBuffer })
+            .object();
+        const slpFileParser = new SlpFileParser(slippiGameFactory, slippiJsGameFactory, slippiJsGameMapper);
+
+        const result = slpFileParser.parse(file);
+        expect(result.isSuccess).toBeTruthy();
+        expect(result.getValue().successfullyParsedFilenames).toHaveLength(1);
+        expect(result.getValue().games).toHaveLength(1);
+    });
 });
